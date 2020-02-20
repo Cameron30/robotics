@@ -11,6 +11,3 @@ def main():
 	rospy.init_node('location_monitor')
 	rospy.Subcriber("/odom", Odometry, callback)
 	rospy.spin()
-
-if__name__ == '__main__':
-	main()
