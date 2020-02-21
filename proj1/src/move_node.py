@@ -11,8 +11,8 @@ def main():
 
 	while not rospy.is_shutdown():
 		msg = Twist()
-		msg.linear.x = .2 
-		publisher.publish(msg)
+		#msg.linear.x = .2 
+		#publisher.publish(msg)
 
 if __name__ == '__main__':
 	main()
