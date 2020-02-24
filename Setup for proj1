@@ -1,6 +1,10 @@
 # First run these to setup the file structure:
 
+mkdir -p ~/catkin_ws/src
+
 cd ~/catkin_ws/src
+
+catkin_make
 
 catkin_create_pkg proj1 std_msgs rospy roscpp
 
