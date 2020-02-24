@@ -14,7 +14,7 @@ def my_callback(msg):
 	#converting from angles to radians
 	angle = 15
 	clockwise = [1, -1]
-	relative_angle = angle * 2 * PI / 360
+	#relative_angle = angle * 2 * PI / 360
 	
 	distance_moved = msg.data
 	
@@ -23,8 +23,8 @@ def my_callback(msg):
 		move.linear.x = 0.1
 
 	if msg.data >= 0.3048:
-		msg.angular.z = relative_angle * random.choice(clockwise)
-		msg.data = 0
+		#msg.angular.z = relative_angle * random.choice(clockwise)
+		#msg.data = 0
 		move.linear.x = 0
 		
 	pub.publish(move)
