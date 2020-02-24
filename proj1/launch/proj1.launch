@@ -9,6 +9,10 @@
   <arg name="gui" default="true"/>
   <arg name="stacks"    value="$(optenv TURTLEBOT_STACKS hexagons)"/>  <!-- circles, hexagons --> 
   <arg name="3d_sensor" value="$(optenv TURTLEBOT_3D_SENSOR kinect)"/>  <!-- kinect, asus_xtion_pro --> 
+  <arg name="custom_gmapping_launch_file" default="$(find turtlebot_navigation)/launch/includes/gmapping/$(arg 3d_sensor)_gmapping.launch.xml"/>
+  <include file="$(arg custom_gmapping_launch_file)"/>
+
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find turtlebot_rviz_launchers)/rviz/navigation.rviz"/>
 
   <include file="$(find gazebo_ros)/launch/empty_world.launch">
     <arg name="use_sim_time" value="true"/>
@@ -30,8 +34,8 @@
     <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel_mux/input/teleop"/>
   </node>
 
-  <node pkg="proj1" type="location_monitor_node.py" name="location_monitor" output="screen"/>
-  <node pkg="proj1" type="move_node.py" name="move" output="screen"/>
+  <!--node pkg="proj1" type="location_monitor_node.py" name="location_monitor" output="screen"/>
+  <node pkg="proj1" type="move_node.py" name="move" output="screen"/-->
   <node pkg="proj1" type="laser_monitor_node.py" name="laser_monitor" output="screen"/>
 
   <!-- Additional code -->
