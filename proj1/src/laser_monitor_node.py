@@ -10,6 +10,8 @@ from kobuki_msgs.msg import BumperEvent
 bump = False
 obstacle = False
 toTurn = 1
+numTimes = 1
+publishing = False
 
 def shutdown(self):
         # stop turtlebot
@@ -66,31 +68,47 @@ def callbackBump(data):
 	else:
 		bump = False
 
+def callbackTeleop(msg):
+	global publishing
+	if msg.linear.x is not 0 or msg.linear.x is not 0:
+		publishing = True
+	else:
+		publishing = False
+
 def processBehavior(pub_teleop, r):
 	msg = Twist()
 	global bump
 	global obstacle
 	global toTurn
-
+	global numTimes
+	global publishing
+	
 	if bump:
 		#stop any movement
 		pub_teleop.publish(Twist())
 		print("Reacting to bump")
+	elif publishing:
+		return
 	elif obstacle:
 		#avoid (this would work for both symmetric and asymmetric)
-		msg.angular.z = .7 * toTurn
+		if numTimes > 20:
+			msg.angular.z = .7
+		else:
+			msg.angular.z = .7 * toTurn
 		#reset boolean
-		obstacle = False
 		counter = 0
 
-		while(counter < 100):
+		print(numTimes)
+		while(counter < (100 * numTimes)):
 			pub_teleop.publish(msg)
 			counter += 1
+		numTimes += 1
 			
 	else:
 		#TODO: Rotate then move for a second
 		msg.linear.x = .1
 		pub_teleop.publish(msg)
+		numTimes = 1
 
 def main():
 	global bump
@@ -102,7 +120,7 @@ def main():
 	sub_scan = rospy.Subscriber("/scan", LaserScan, callbackLaser)
 	sub_odom = rospy.Subscriber("/odom", Odometry, callbackLocation)
 	sub_bump = rospy.Subscriber('/mobile_base/events/bumper', BumperEvent, callbackBump)
-
+	sub_teleop = rospy.Subscriber('/cmd_vel_mux/input_teleop', Twist, callbackTeleop)
 	#publish to the robot movement
 	pub_teleop = rospy.Publisher('/cmd_vel_mux/input/teleop', Twist, queue_size=10)
 	
