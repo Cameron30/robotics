@@ -1,9 +1,13 @@
 # Documentation
 CS 4023 
 Project 1
+
 Phillip Voss
+
 Zachary Kasper
+
 Cameron Ray
+
 Yilei Shen
 
 
