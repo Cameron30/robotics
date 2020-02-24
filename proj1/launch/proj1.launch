@@ -34,11 +34,7 @@
     <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel_mux/input/teleop"/>
   </node>
 
-  <!--node pkg="proj1" type="location_monitor_node.py" name="location_monitor" output="screen"/>
-  <node pkg="proj1" type="move_node.py" name="move" output="screen"/-->
-  <!--node pkg="proj1" type="laser_monitor_node.py" name="laser_monitor" output="screen"/-->
-  <node pkg="proj1" type="odom_movement_detector.py" name="movement_detector_node" output="screen"/>
-  <node pkg="proj1" type="test_movement.py" name="test_movement" output="screen"/>
+  <node pkg="proj1" type="project_node.py" name="project" output="screen"/>
 
   <!-- Additional code -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
