@@ -1,23 +1,27 @@
-# Documentation
-CS 4023 
-Project 1
+# First run these to setup the file structure:
 
-Phillip Voss
+mkdir -p ~/catkin_ws/src
 
-Zachary Kasper
+cd ~/catkin_ws/src
 
-Cameron Ray
+catkin_make
 
-Yilei Shen
+catkin_create_pkg proj1 std_msgs rospy roscpp
 
+cd ..
 
-  The XML file describing the layout of the world is found in the launch folder of proj1 and is named project1.world. The world name is set to default and the sun name is set to sun. It is set to a be coming down at an angle so as to cast shadows by the object in our world as well as the robot itself. We are using all of the default light setting for gazebo when using the sunn as the light source. The next object created in the file is the ground. Its name is ground_plane and is also using the default Gazebo ground object including the collison fucntion and friction function. The visual settings are also set to default. This includes default shadow and material settings.
-  
-  Next is the gravity function which once again is using the defaults settings and the pull of gravity is set to -9.8. Magnetic fields, atmospheric settings, and the world's physics are set to default values. The scene is then set with ambient light settings as well as the background and shadows. These parameters are all set to the default values. Following the scene settings, the spherical coordinatates of the world are set to the earth's actual surface model in addition to choosing a latitude, longitude, elevation, and heading all of 0. The next object defined is the state of the world. This includes the simulated time relative to the real time and wall time. These are all set to default times. The ground velocity is then set to 0, the acceleration is set to 0, and the wrench is set to 0.
-  
-  The next object in the XML file is the wall named wall_10ft. TODO
-  
-  
-  
-  
-  The XML launch file is found in the launch folder of proj1 and is named proj1.launch. TODO
+catkin_make
+
+. ~/catkin_ws/devel/setup.bash
+
+# Now replace the proj1 folder with the proj1 git folder and then rebuild:
+
+cd ~/catkin_ws
+
+catkin_make
+
+. ~/catkin_ws/devel/setup.bash
+
+# Now you should be good to go. Nodes go into proj1/src, and need to be added to the proj1.launch file.
+
+roslaunch proj1 proj1.launch
