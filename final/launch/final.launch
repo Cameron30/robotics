@@ -25,16 +25,10 @@
     <arg name="3d_sensor" value="$(arg 3d_sensor)"/>
   </include>
 
-  <!-- Keyboard teleop -->
-  <node pkg="turtlebot_teleop" type="turtlebot_teleop_key" name="turtlebot_teleop_keyboard"  output="screen">
-    <param name="scale_linear" value="0.5" type="double"/>
-    <param name="scale_angular" value="1.5" type="double"/>
-    <remap from="turtlebot_teleop_keyboard/cmd_vel" to="cmd_vel_mux/input/teleop"/>
-  </node>
-
   <node pkg="final" type="reactive.py" name="reactive" output="screen"/>
 
   <node pkg="final" type="nodeTraversal.py" name="nodeTraversal" output="screen"/>
+
 
   <!-- Additional code -->
   <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
