@@ -57,7 +57,7 @@ def callbackLaser(msg):
 		obstacle = True
 		toTurn = numpy.sign(meanDeg)
 		
-		print("Reacting to obstacle:", degrees, meanDeg, toTurn)
+		#print("Reacting to obstacle:", degrees, meanDeg, toTurn)
 	else:
 		obstacle = False
 
@@ -128,7 +128,7 @@ def main():
 	r = rospy.Rate(10)
 	while not rospy.is_shutdown() and not bump:
 		#process the behaviors in order then sleep (for a second)
-		processBehavior(pub_teleop, r)
+		#processBehavior(pub_teleop, r)
 		r.sleep()
 
 if __name__ == '__main__':
